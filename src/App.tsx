@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import ClickArea from './components/ClickArea'
+import TimeButton from './components/TimeButton'
 
 const avalibleSeconds = [1, 5, 10, 30, 50, 100]
-function App() {
+
+function App(): JSX.Element {
 	const [timerSeconds, setTimerSeconds] = useState<number>(5)
 	const [timer, setTimer] = useState({ init: false, value: 0 })
 	const [clicks, setClicks] = useState<number>(0)
@@ -41,15 +43,14 @@ function App() {
 			<div>
 				Chose the test:
 				{avalibleSeconds.map((s) => (
-					<button
-						style={{ backgroundColor: timerSeconds === s ? 'rgba(255,255,255, 0.2)' : 'initial' }}
+					<TimeButton
 						key={`${s}-value`}
 						onClick={() => {
 							setTimerSeconds(s)
 						}}
-					>
-						{s}
-					</button>
+						selected={timerSeconds === s}
+						value={s}
+					/>
 				))}
 			</div>
 			{timer.value}
